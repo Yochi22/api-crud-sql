@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/categories/:id/elements/:id', getElements)
 router.get('/elements/:id', getElement)
-router.patch('/categories/:id/elements/:id', putElements)
+router.patch('/elements/:id', putElements)
 router.post('/categories/:id/elements', postElements )
 router.delete('/categories/:id/elements/:id', deleteElements)
 
