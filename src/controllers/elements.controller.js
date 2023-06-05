@@ -26,8 +26,8 @@ if (rows.length <= 0 ) return res.status(404).json({
 
 export const postElements = async (req, res) => {
     try {
-const  {Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories} = req.body
-const [rows] = await pool.query('INSERT INTO elements (Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories])
+const  {Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories_id} = req.body
+const [rows] = await pool.query('INSERT INTO elements (Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories_id])
 res.send({
     id: rows.insertId,
     Referencias,
@@ -37,7 +37,7 @@ res.send({
     Estado,
     Lugar,
     Observaciones,
-    Categories
+    Categories_id
 });
     } catch (error) {
     return res.status(500)
@@ -59,9 +59,9 @@ res.sendStatus(204)
 
 export const putElements = async (req, res) => {
  const {id} = req.params
- const {Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories} = req.body
+ const {Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories_id} = req.body
 
-const [result] = await pool.query('UPDATE elements SET Referencias = IFNULL(?, Referencias), Nombre = IFNULL(?, Nombre), Cantidad = IFNULL(?, Cantidad), Valor = IFNULL(?, Valor), Estado = IFNULL(?, Estado), Lugar = IFNULL(?, Lugar), Observaciones = IFNULL(?, Observaciones), Categories_id = IFNULL(?, Categories) WHERE id = ?', [Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories, id])
+const [result] = await pool.query('UPDATE elements SET Referencias = IFNULL(?, Referencias), Nombre = IFNULL(?, Nombre), Cantidad = IFNULL(?, Cantidad), Valor = IFNULL(?, Valor), Estado = IFNULL(?, Estado), Lugar = IFNULL(?, Lugar), Observaciones = IFNULL(?, Observaciones), Categories_id = IFNULL(?, Categories_id) WHERE id = ?', [Referencias, Nombre, Cantidad, Valor, Estado, Lugar, Observaciones, Categories_id, id])
 console.log(result)
 
 if (result.affectedRows === 0 ) return res.status(404).json({
