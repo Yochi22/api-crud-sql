@@ -1,10 +1,10 @@
 import {pool} from '../db.js'
 
-app.get('/elements/:categoryId', (req, res) => {
+export const getElements = async (req, res) => {
     const categoryId = req.params.categoryId;
     const sql = 'SELECT * FROM elements WHERE Categories_id = ?';
   
-    pool.query(sql, [categoryId], (error, results) => {
+    await pool.query(sql, [categoryId], (error, results) => {
       if (error) {
         console.error('Error al obtener los elementos:', error);
         res.status(500).json({ error: 'Error al obtener los elementos' });
@@ -12,7 +12,8 @@ app.get('/elements/:categoryId', (req, res) => {
         res.json(results);
       }
     });
-  });
+  };
+
 export const getElement = async (req, res) => {
     try {
     const [rows] = await pool.query('SELECT * FROM elements WHERE id = ?', [req.params.id])
