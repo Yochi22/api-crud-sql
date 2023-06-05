@@ -37,7 +37,7 @@ res.send({
     Estado,
     Lugar,
     Observaciones,
-    Categories_id
+    Categories
 });
     } catch (error) {
     return res.status(500)
