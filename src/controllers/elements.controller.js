@@ -1,18 +1,14 @@
 import {pool} from '../db.js'
 
 export const getElements = async (req, res) => {
-    try {
-      const Categories_id = req.params.Categories_id; // Obtener el ID de la categoría desde la solicitud
-      const query = 'SELECT * FROM elements WHERE Categories_id = ?'; // Consulta SQL para filtrar por la llave foránea
-  
-      const [rows] = await pool.query(query, [Categories_id]);
-      res.json(rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error en el servidor' });
-    }
-  };
-  
+   try {
+ const [rows] = await pool.query('SELECT * FROM elements')
+ res.json(rows) 
+   } catch (error) {
+    return res.status(500)
+   }
+}
+
 export const getElement = async (req, res) => {
     try {
     const [rows] = await pool.query('SELECT * FROM elements WHERE id = ?', [req.params.id])
