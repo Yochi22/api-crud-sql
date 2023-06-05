@@ -2,7 +2,7 @@ import {pool} from '../db.js'
 
 export const getElements = async (req, res) => {
    try {
- const [rows] = await pool.query('SELECT * FROM elements WHERE Categories_id = ?')
+ const [rows] = await pool.query('SELECT * FROM elements WHERE Categories_id = ?', [req.params.Categories_id])
  res.json(rows) 
    } catch (error) {
     return res.status(500)
