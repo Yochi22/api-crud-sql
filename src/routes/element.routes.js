@@ -5,7 +5,7 @@ import {getElements, getElement, postElements, putElements, deleteElements} from
 const router = Router()
 
 router.get('/categories/:id/elements/:id', getElements)
-router.get('/categories/:id/elements/:id', getElement)
+router.get('/elements/:id', getElement)
 router.patch('/categories/:id/elements/:id', putElements)
 router.post('/categories/:id/elements', postElements )
 router.delete('/categories/:id/elements/:id', deleteElements)
