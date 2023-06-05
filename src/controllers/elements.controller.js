@@ -1,13 +1,18 @@
 import {pool} from '../db.js'
 
 export const getElements = async (req, res) => {
-   try {
- const [rows] = await pool.query('SELECT * FROM elements')
- res.json(rows) 
-   } catch (error) {
-    return res.status(500)
-   }
-}
+    try {
+      const id = req.params.id; // Obtener el ID de la categoría desde la solicitud
+      const query = 'SELECT * FROM elements WHERE id = ?'; // Consulta SQL para filtrar por categoría
+  
+      const [rows] = await pool.query(query, [id]);
+      res.json(rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error en el servidor' });
+    }
+  };
+  
 
 export const getElement = async (req, res) => {
     try {
